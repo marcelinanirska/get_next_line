@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcelina <marcelina@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mnirska <mnirska@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:25:17 by marcelina         #+#    #+#             */
-/*   Updated: 2024/12/07 19:30:59 by marcelina        ###   ########.fr       */
+/*   Updated: 2024/12/09 12:07:51 by mnirska          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,23 @@
 #include <unistd.h>
 #include <stdio.h>
 
-char	*ft_free(char *stash, char *buf)
-{
-	char	*temp;
-
-	temp = ft_strjoin(stash, buf);
-	free(stash);
-	return (temp);
-}
-
 char	*ft_next_line(char *stash)
 {
 	int		i;
 	int		j;
-	char	*line;
+	char	*next_line;
 
 	i = 0;
-	while (stash[i] && stash[i] != '\n')
+	while (stash[i] != '\n' && stash[i])
 		i++;
 	if (!stash[i])
-	{
-		free(stash);
-		return (NULL);
-	}
-	line = ft_calloc((ft_strlen(stash) - i + 1), sizeof(char));
+		return (free(stash), NULL);
+	next_line = ft_calloc((ft_strlen(stash) - i), sizeof(char));
 	i++;
 	j = 0;
 	while (stash[i])
-		line[j++] = stash[i++];
-	free(stash);
-	return (line);
+		next_line[j++] = stash[i++];
+	return (free(stash), next_line);
 }
 
 char *ft_new_line(char *stash)
@@ -54,44 +41,44 @@ char *ft_new_line(char *stash)
     i = 0;
     if (!stash[i])
         return (NULL);
-    while (stash[i] && stash[i] != '\n')
+    while (stash[i] != '\n' && stash[i])
         i++;
     new_line = ft_calloc(i + 2, sizeof(char)); 
     i = 0;
-    while (stash[i] && stash[i] != '\n')
+    while (stash[i] != '\n' && stash[i])
     {
         new_line[i] = stash[i];
         i++;
     }
-    if (stash[i] && stash[i] == '\n')
+    if (stash[i] == '\n' && stash[i])
         new_line[i++] = '\n';
-
     return (new_line);
 }
 
-char *ft_read(int fd, char *result)
+char *ft_read_line(int fd, char *stash)
 {
     int   bytes_read;
-    char  *stash;
+    char  *buffer;
+    char *temp;
 
     bytes_read = 1;
-    if (!result)
-		result = ft_calloc(1, 1);
-    stash = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
     if (!stash)
+		stash = ft_calloc(1, 1);
+    buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+    if (!buffer)
         return (NULL);
     while (bytes_read > 0)
     {
-        bytes_read = read(fd, stash, BUFFER_SIZE);
+        bytes_read = read(fd, buffer, BUFFER_SIZE);
         if (bytes_read <= 0)
-            return (free (stash), NULL);
-        stash[bytes_read] = '\0';
-        result = ft_free(result, stash);
-        if (ft_strchr(stash, '\n'))
+            return (free (buffer), NULL);
+        buffer[bytes_read] = '\0';
+        temp = stash;
+        stash = ft_strjoin(temp, buffer);
+        if (ft_strchr(buffer, '\n'))
             break;
     }
-    free(stash);
-    return (result);
+    return (free(buffer), free(temp), stash);
 }
 char *get_next_line(int fd)
 {
@@ -100,7 +87,7 @@ char *get_next_line(int fd)
     
     if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-    stash = ft_read(fd, stash);
+    stash = ft_read_line(fd, stash);
     if (!stash)
 		return (NULL);
     new_line = ft_new_line(stash);
@@ -110,29 +97,29 @@ char *get_next_line(int fd)
 
 #include <fcntl.h>
 
-int main(void)
-{
-    int    fd;
-    char  *next_line;
-    int  count;
+// int main(void)
+// {
+//     int    fd;
+//     char  *next_line;
+//     int  count;
 
-    count = 0;
-    fd = open("file.txt", O_RDONLY);
-    if (fd == -1)
-    {
-        printf("File not found");
-        return (1);
-    }
-    while (1)
-    {
-        next_line = get_next_line(fd);
-        if (!next_line)
-            break;
-        count++;
-        printf("[%d]:%s\n", count, next_line);
-        free(next_line);
-        next_line = NULL;
-    }
-    close(fd);
-    return (0);
-}
+//     count = 0;
+//     fd = open("file.txt", O_RDONLY);
+//     if (fd == -1)
+//     {
+//         printf("File not found");
+//         return (1);
+//     }
+//     while (1)
+//     {
+//         next_line = get_next_line(fd);
+//         if (!next_line)
+//             break;
+//         count++;
+//         printf("[%d]:%s\n", count, next_line);
+//         free(next_line);
+//         next_line = NULL;
+//     }
+//     close(fd);
+//     return (0);
+// }
