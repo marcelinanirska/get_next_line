@@ -6,7 +6,7 @@
 /*   By: mnirska <mnirska@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:25:17 by marcelina         #+#    #+#             */
-/*   Updated: 2025/01/13 14:29:19 by mnirska          ###   ########.fr       */
+/*   Updated: 2025/01/13 14:58:52 by mnirska          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_next_line(char *stash)
 		i++;
 	if (!stash[i])
 		return (free(stash), NULL);
-	next_line = ft_calloc((ft_strlen(stash) - i + 1), sizeof(char));
+	next_line = ft_calloc((ft_strlen(stash) - i), sizeof(char));
 	i++;
 	j = 0;
 	while (stash[i])
@@ -70,7 +70,7 @@ char	*ft_read_line(int fd, char *stash)
 		stash = ft_calloc(1, 1);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
-		return (NULL);
+		return (free(stash), NULL);
 	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
@@ -104,32 +104,32 @@ char	*get_next_line(int fd)
 	stash = ft_next_line(stash);
 	return (new_line);
 }
+/* 
+#include <fcntl.h>
 
-// #include <fcntl.h>
+int main(void)
+{
+	int		fd;
+	char	*next_line;
+	int		count;
 
-// int main(void)
-// {
-//     int    fd;
-//     char  *next_line;
-//     int  count;
-
-//     count = 0;
-//     fd = open("file.txt", O_RDONLY);
-//     if (fd == -1)
-//     {
-//         printf("File not found");
-//         return (1);
-//     }
-//     while (1)
-//     {
-//         next_line = get_next_line(fd);
-//         if (!next_line)
-//             break;
-//         count++;
-//         printf("[%d]:%s", count, next_line);
-//         free(next_line);
-//         next_line = NULL;
-//     }
-//     close(fd);
-//     return (0);
-// }
+	count = 0;
+	fd = open("file.txt", O_RDONLY);
+	if (fd == -1)
+	{
+		printf("File not found.");
+		return (1);
+	}
+	while (1)
+	{
+		next_line = get_next_line(fd);
+		if (!next_line)
+			break;
+		count++;
+		printf("[%d]:%s", count, next_line);
+		free(next_line);
+		next_line = NULL;
+	}
+	close(fd);
+	return (0);
+} */

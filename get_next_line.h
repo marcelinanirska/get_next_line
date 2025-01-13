@@ -6,7 +6,7 @@
 /*   By: mnirska <mnirska@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 09:26:50 by mnirska           #+#    #+#             */
-/*   Updated: 2025/01/08 11:50:30 by mnirska          ###   ########.fr       */
+/*   Updated: 2025/01/13 14:57:54 by mnirska          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 7
 # endif
 
 # include <fcntl.h>
