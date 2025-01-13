@@ -6,7 +6,7 @@
 /*   By: mnirska <mnirska@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:25:17 by marcelina         #+#    #+#             */
-/*   Updated: 2025/01/13 14:58:52 by mnirska          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:33:09 by mnirska          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ char	*get_next_line(int fd)
 	stash = ft_next_line(stash);
 	return (new_line);
 }
-/* 
-#include <fcntl.h>
 
-int main(void)
+/* #include <fcntl.h>
+
+int	main(void)
 {
 	int		fd;
 	char	*next_line;
@@ -124,7 +124,7 @@ int main(void)
 	{
 		next_line = get_next_line(fd);
 		if (!next_line)
-			break;
+			break ;
 		count++;
 		printf("[%d]:%s", count, next_line);
 		free(next_line);
