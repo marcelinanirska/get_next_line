@@ -6,15 +6,16 @@
 /*   By: mnirska <mnirska@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 09:26:50 by mnirska           #+#    #+#             */
-/*   Updated: 2024/12/09 11:43:21 by mnirska          ###   ########.fr       */
+/*   Updated: 2025/01/08 11:50:30 by mnirska          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 7
-#endif
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -30,6 +31,5 @@ size_t	ft_strlen(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strchr(char *s, int c);
-
 
 #endif

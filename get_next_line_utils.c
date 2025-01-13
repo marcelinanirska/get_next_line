@@ -6,7 +6,7 @@
 /*   By: mnirska <mnirska@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:24:37 by marcelina         #+#    #+#             */
-/*   Updated: 2024/12/09 10:22:00 by mnirska          ###   ########.fr       */
+/*   Updated: 2025/01/13 13:55:37 by mnirska          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strchr(char *str, int c)
 		if (str[i] == char_c)
 			return ((char *)&str[i]);
 		i++;
-	}	
+	}
 	if (str[i] == char_c)
 		return ((char *)&str[i]);
 	return (NULL);
@@ -81,6 +81,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	while (s2[i])
 		joined[j++] = s2[i++];
-	joined[j] = 0;
+	joined[j] = '\0';
 	return (joined);
 }
