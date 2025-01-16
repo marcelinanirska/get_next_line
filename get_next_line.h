@@ -6,7 +6,7 @@
 /*   By: mnirska <mnirska@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 09:26:50 by mnirska           #+#    #+#             */
-/*   Updated: 2025/01/13 14:57:54 by mnirska          ###   ########.fr       */
+/*   Updated: 2025/01/16 12:45:31 by mnirska          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 7
+#  define BUFFER_SIZE 1
 # endif
 
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 char	*get_next_line(int fd);
 char	*ft_free_line(char *buffer, char *buf);

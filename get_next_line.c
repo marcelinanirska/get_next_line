@@ -6,13 +6,11 @@
 /*   By: mnirska <mnirska@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:25:17 by marcelina         #+#    #+#             */
-/*   Updated: 2025/01/13 16:33:09 by mnirska          ###   ########.fr       */
+/*   Updated: 2025/01/16 13:06:15 by mnirska          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h" 
-#include <unistd.h>
-#include <stdio.h>
+#include "get_next_line.h"
 
 char	*ft_next_line(char *stash)
 {
